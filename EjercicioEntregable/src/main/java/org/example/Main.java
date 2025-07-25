@@ -1,17 +1,41 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.example.dto.CuentaDTO;
+import org.example.entidades.CajaDeAhorro;
+import org.example.entidades.CuentaCorriente;
+import org.example.service.LogicaCuenta;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        try {
+            LogicaCuenta logica = LogicaCuenta.getInstancia();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+            // Crear cuentas usando Builder interno
+            CajaDeAhorro caja = new CajaDeAhorro.Builder()
+                    .setId(1)
+                    .setSaldoInicial(1000)
+                    .build();
+
+            CuentaCorriente corriente = new CuentaCorriente.Builder()
+                    .setId(2)
+                    .setSaldoInicial(500)
+                    .setLimiteDescubierto(300)
+                    .build();
+
+            logica.agregarCuenta(caja);
+            logica.agregarCuenta(corriente);
+
+            logica.agregarSaldo(1, 500);     // Caja: 1500
+            logica.quitarSaldo(2, 700);      // Corriente: queda en -200
+
+            CuentaDTO dto1 = logica.obtenerCuentaDTO(1);
+            CuentaDTO dto2 = logica.obtenerCuentaDTO(2);
+
+            System.out.println("Cuenta 1 - Tipo: " + dto1.getTipo() + ", Saldo: " + dto1.getSaldo());
+            System.out.println("Cuenta 2 - Tipo: " + dto2.getTipo() + ", Saldo: " + dto2.getSaldo());
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
