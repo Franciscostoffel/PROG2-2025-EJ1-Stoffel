@@ -6,6 +6,7 @@ public class PaypalGateway implements PaymentGateway {
         System.out.println("Autorizando pago de $" + amount + " con PayPal");
         return true;
     }
+
     @Override
     public boolean capture(double amount) {
         System.out.println("Capturando pago de $" + amount + " con PayPal");

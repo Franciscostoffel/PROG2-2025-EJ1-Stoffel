@@ -1,9 +1,11 @@
-package org.example.envios;
+package org.example.service;
 
-public class ShippingCalculator {
+import org.example.envios.ShippingStrategy;
+
+public class EnvioLogica {
     private ShippingStrategy strategy;
 
-    public ShippingCalculator(ShippingStrategy strategy) {
+    public EnvioLogica(ShippingStrategy strategy) {
         this.strategy = strategy;
     }
 

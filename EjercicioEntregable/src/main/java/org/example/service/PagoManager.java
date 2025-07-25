@@ -1,7 +1,8 @@
-package org.example.pagos;
+package org.example.service;
 
-public class PaymentManager {
+import org.example.pagos.*;
 
+public class PagoManager {
     public void processPayment(double amount, String provider) {
         PaymentGateway gateway;
         PaymentProcessor processor;
@@ -13,7 +14,7 @@ public class PaymentManager {
                 break;
             case "mercadopago":
                 gateway = new MercadoPagoGateway();
-                processor = new MercadoPagoPaymentProcessor(gateway);
+                processor = new MercadoPago(gateway);
                 break;
             default:
                 System.out.println("Proveedor de pago no soportado.");

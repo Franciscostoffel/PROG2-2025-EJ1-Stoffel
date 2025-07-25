@@ -11,4 +11,9 @@ public class MercadoPagoGateway implements PaymentGateway {
         System.out.println("Capturando pago de $" + amount + " con MercadoPago");
         return true;
     }
+    public void processPayment(double amount) {
+        authorize(amount);
+        capture(amount);
+        System.out.println("Procesando pago con MercadoPago de $" + amount);
+    }
 }
