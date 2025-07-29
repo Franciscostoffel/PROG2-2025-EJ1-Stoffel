@@ -2,25 +2,24 @@ plugins {
     id 'java'
     id 'jacoco'
 }
-
 group = 'org.example'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
-
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.mockito:mockito-core:5.10.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.10.0'
 }
-jacoco {
-    toolVersion = "0.8.11"
-}
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+jacoco {
+    toolVersion = "0.8.11"
 }
 jacocoTestReport {
     dependsOn test
@@ -30,3 +29,5 @@ jacocoTestReport {
         html.required = true
     }
 }
+
+
